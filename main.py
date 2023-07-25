@@ -3,36 +3,32 @@
 SEPARATOR = '------------------------------------------'
 
 # user profile
-n = ''
-a = 0
-ph = ''
-e = ''
-i = ''
-# social links
-v = ''
-t = ''
-tk = ''
+name = ''
+age = 0
+phone_number = ''
+email_address = ''
+additional_info = ''
 
 
-def general_info_user(n_parameter, a_parameter, ph_parameter, e_parameter, i_parameter):
+def general_info_user(name_parameter, age_parameter, phone_parameter, email_parameter, add_info_parameter):
     print(SEPARATOR)
-    print('Имя:    ', n_parameter)
-    if 11 <= a_parameter % 100 <= 19:
+    print('Имя:    ', name_parameter)
+    if 11 <= age_parameter % 100 <= 19:
         years_parameter = 'лет'
-    elif a_parameter % 10 == 1:
+    elif age_parameter % 10 == 1:
         years_parameter = 'год'
-    elif 2 <= a_parameter % 10 <= 4:
+    elif 2 <= age_parameter % 10 <= 4:
         years_parameter = 'года'
     else:
         years_parameter = 'лет'
 
-    print('Возраст:', a_parameter, years_parameter)
-    print('Телефон:', ph_parameter)
-    print('E-mail: ', e_parameter)
-    if i:
+    print('Возраст:', age_parameter, years_parameter)
+    print('Телефон:', phone_parameter)
+    print('E-mail: ', email_parameter)
+    if add_info_parameter:
         print('')
         print('Дополнительная информация:')
-        print(i_parameter)
+        print(add_info_parameter)
 
 
 print('Приложение MyProfile')
@@ -56,7 +52,6 @@ while True:
             print(SEPARATOR)
             print('ВВЕСТИ ИЛИ ОБНОВИТЬ ИНФОРМАЦИЮ')
             print('1 - Общая информация')
-            print('2 - Социальные сети и мессенджеры')
             print('0 - Назад')
 
             option2 = int(input('Введите номер пункта меню: '))
@@ -64,28 +59,22 @@ while True:
                 break
             if option2 == 1:
                 # input general info
-                n = input('Введите имя: ')
+                name = input('Введите имя: ')
                 while 1:
                     # validate user age
-                    a = int(input('Введите возраст: '))
-                    if a > 0:
+                    age = int(input('Введите возраст: '))
+                    if age > 0:
                         break
                     print('Возраст должен быть положительным')
 
-                uph = input('Введите номер телефона (+7ХХХХХХХХХХ): ')
-                ph = ''
-                for ch in uph:
-                    if ch == '+' or ('0' <= ch <= '9'):
-                        ph += ch
+                inter_standard_number = input('Введите номер телефона (+7ХХХХХХХХХХ): ')
+                phone_number = ''
+                for isn in inter_standard_number:
+                    if isn == '+' or ('0' <= isn <= '9'):
+                        phone_number += isn
 
-                e = input('Введите адрес электронной почты: ')
-                i = input('Введите дополнительную информацию:\n')
-
-            elif option2 == 2:
-                # input social links
-                v = input('Введите адрес профиля Вконтакте: ')
-                t = input('Введите логин Telegram: ')
-                tk = input('Введите логин Tiktok: ')
+                email_address = input('Введите адрес электронной почты: ')
+                additional_info = input('Введите дополнительную информацию:\n')
             else:
                 print('Введите корректный пункт меню')
     elif option == 2:
@@ -101,17 +90,10 @@ while True:
             if option2 == 0:
                 break
             if option2 == 1:
-                general_info_user(n, a, ph, e, i)
+                general_info_user(name, age, phone_number, email_address, additional_info)
 
             elif option2 == 2:
-                general_info_user(n, a, ph, e, i)
-
-                # print social links
-                print('')
-                print('Социальные сети и мессенджеры')
-                print('Вконтакте:', v)
-                print('Telegram: ', t)
-                print('Tiktok:   ', tk)
+                general_info_user(name, age, phone_number, email_address, additional_info)
             else:
                 print('Введите корректный пункт меню')
     else:
