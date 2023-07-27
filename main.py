@@ -22,7 +22,7 @@ correspondent_account = 0
 def general_info_user(name_parameter, age_parameter, phone_parameter, email_parameter, add_info_parameter,
                       mail_index_parameter, mail_address_parameter):
     print(SEPARATOR)
-    print('Имя:    ', name_parameter)
+    print('Имя:', name_parameter)
     if 11 <= age_parameter % 100 <= 19:
         years_parameter = 'лет'
     elif age_parameter % 10 == 1:
@@ -41,6 +41,14 @@ def general_info_user(name_parameter, age_parameter, phone_parameter, email_para
         print('')
         print('Дополнительная информация:')
         print(add_info_parameter)
+
+
+def count_length(length_parameter):
+    count = 0
+    while length_parameter > 0:
+        length_parameter //= 10
+        count += 1
+    return count
 
 
 print('Приложение MyProfile')
@@ -70,7 +78,8 @@ while True:
             option2 = int(input('Введите номер пункта меню: '))
             if option2 == 0:
                 break
-            if option2 == 1:
+
+            elif option2 == 1:
                 # input general info
                 name = input('Введите имя: ')
                 while 1:
@@ -79,35 +88,39 @@ while True:
                     if age > 0:
                         break
                     print('Возраст должен быть положительным')
-
                 inter_standard_number = input('Введите номер телефона (+7ХХХХХХХХХХ): ')
                 phone_number = ''
                 for isn in inter_standard_number:
                     if isn == '+' or ('0' <= isn <= '9'):
                         phone_number += isn
-
                 email_address = input('Введите адрес электронной почты: ')
-                mail_index = input('Введите почтовый индекс: ')
+                mail_index_temp = input('Введите почтовый индекс: ')
+                for mit in mail_index_temp:
+                    if '0' <= mit <= '9':
+                        mail_index += mit
                 mail_address = input('Введите почтовый адрес (без индекса): ')
                 additional_info = input('Введите дополнительную информацию:\n')
-            if option2 == 2:
+
+            elif option2 == 2:
                 # input entrepreneur info
                 while True:
                     ogrnip = int(input("Введите ОГРНИП: "))
-                    if len(ogrnip) == 15:
+                    if count_length(ogrnip) == 15:
                         break
                     print("ОГРНИП должен содержать 15 цифр.")
                 inn = int(input("Введите ИНН: "))
                 while True:
                     checking_account = int(input('Введите расчетный счет: '))
-                    if len(checking_account) == 20:
+                    if count_length(checking_account) == 20:
                         break
                     print("Расчетный счет должен содержать 20 цифр.")
                 name_bank = input('Введите название банка: ')
                 bik = int(input('Введите БИК: '))
                 correspondent_account = int(input('Введите корреспонденский счет: '))
+
             else:
                 print('Введите корректный пункт меню.')
+
     elif option == 2:
         # submenu 2: print info
         while True:
@@ -120,7 +133,8 @@ while True:
             option2 = int(input('Введите номер пункта меню: '))
             if option2 == 0:
                 break
-            if option2 == 1:
+
+            elif option2 == 1:
                 general_info_user(name, age, phone_number, email_address, additional_info, mail_index, mail_address)
 
             elif option2 == 2:
@@ -135,7 +149,9 @@ while True:
                 print("Банк:", name_bank)
                 print("БИК:", bik)
                 print("К/с:", correspondent_account)
+
             else:
                 print('Введите корректный пункт меню')
+
     else:
         print('Введите корректный пункт меню')
